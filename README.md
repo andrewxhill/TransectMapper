@@ -27,7 +27,37 @@ optional:
 - Example:
 
 		$ python transect2overlay.py -d ../data/20110504/files/images/201105042046 -o newkml
-        
+
+- Example image header:
+
+`    <entry timestamp="1304429991.248683820" time="2011 05  3 13:39:51.248">
+        <capture_time>1304429990.583357625</capture_time>
+        <auvstate>
+            <altitude>14.234</altitude>
+            <depth>0.171272</depth>
+            <heading>76.0199</heading>
+            <lat>2456.5694N</lat>
+            <lon>08027.7486W</lon>
+            <pitch>-6.45996</pitch>
+            <roll>3.38379</roll>
+            <surge>-0.220703</surge>
+        </auvstate>
+        <features>
+            <brightness>0</brightness>
+            <exposure>1.18323</exposure>
+            <gain>0.14809</gain>
+            <gamma>1</gamma>
+            <shutter>0.00112784</shutter>
+            <tilt>3.75</tilt>
+            <white-balance_bu>89</white-balance_bu>
+            <white-balance_rv>80</white-balance_rv>
+            <zoom>0</zoom>
+        </features>
+        <filename>/var/iac/images/201105031339/frame000020_0.jpg</filename>
+        <jpeg_quality>90</jpeg_quality>
+        <thread_id>-1290048624</thread_id>
+    </entry>`
+
 Authors:
 ---------------
 
