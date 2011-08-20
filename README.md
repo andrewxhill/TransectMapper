@@ -30,9 +30,9 @@ optional:
 
 - Example image header:
 
->    <entry timestamp="1304429991.248683820" time="2011 05  3 13:39:51.248">
->        <capture_time>1304429990.583357625</capture_time>
->        <auvstate>
+    <entry timestamp="1304429991.248683820" time="2011 05  3 13:39:51.248">
+        <capture_time>1304429990.583357625</capture_time>
+        <auvstate>
             <altitude>14.234</altitude>
             <depth>0.171272</depth>
             <heading>76.0199</heading>
