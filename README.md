@@ -30,5 +30,7 @@ optional:
         
 Authors:
 ---------------
+
 The developer of the tool is Andrew W Hill (@andrewxhill)
-Based on work by Val Schmidt to build KML from transect data.
+
+* Based on work by Val Schmidt to build KML from transect data.
