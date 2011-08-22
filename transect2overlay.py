@@ -193,6 +193,20 @@ class GroundOverlay():
         self.south, self.east = self.OffsetToLatLon(self.bottom, self.right)
         self.north, self.west = self.OffsetToLatLon(self.top, self.left)
         
+        self.json = {'rotated':{'top':    self.top_coordinates,
+                                'bottom': self.bottom_coordinates,
+                                'left': self.left_coordinates,
+                                'right': self.right_coordinates,
+                                'heading': self.heading
+                               },
+                     'unrotated':{'top': self.top,
+                                  'bottom': self.bottom,
+                                  'left': self.left,
+                                  'right': self.right,
+                                  'heading': self.heading,
+                                  }
+                    }
+        
     def getkml(self):
         entry = """
         <GroundOverlay>
@@ -383,9 +397,12 @@ if __name__ == '__main__':
                             out['longitude'] = orig
                     out[p.tag] = p.text
                     
-        newdat[n] = out
         e = GroundOverlay(n, float(out['pitch']), float(out['surge']), float(out['altitude']), float(out['latitude']), float(out['longitude']), float(out['roll']), float(out['heading']), f).getkml()
         kml.addentry(e)
+        out['overlay'] = e.json
+        newdat[n] = out
+        
+        
         i=i+1
         
     kml_doc = kml.output()
