@@ -100,6 +100,7 @@ class GroundOverlay():
         self.longitude =  longitude
         self.roll =  roll
         self.heading =  heading
+        self.rotation = -1 * self.heading if self.heading <=180 else 1*(360.0-self.heading)
         self.f = os.path.abspath(f)
         self.draworder = draworder
         
@@ -186,7 +187,7 @@ class GroundOverlay():
               <rotation>%s</rotation>
            </LatLonBox>
         </GroundOverlay>
-        """ % ( self.n, self.draworder, self.f, self.north, self.south, self.east, self.west, self.heading )
+        """ % ( self.n, self.draworder, self.f, self.north, self.south, self.east, self.west, self.rotation )
         return entry
         
     def alt_to_distance(self):
@@ -359,11 +360,15 @@ if __name__ == '__main__':
                     out[p.tag] = p.text
         
         e = GroundOverlay(n, float(out['pitch']), float(out['surge']), float(out['altitude']), float(out['latitude']), float(out['longitude']), float(out['roll']), float(out['heading']), f, draworder=drawOrder)
-        if drawOrder == 97:
+        if do == 0:
+            drawOrder = 99
             do=1
-        elif drawOrder == 100:
-            do=-1
-        drawOrder += do
+        elif do == 1:
+            drawOrder = 99
+            do=2
+        else:
+            drawOrder = 100
+            do = 0
         kml.addentry(e.getkml())
         out['overlay'] = e.json
         newdat[n] = out
