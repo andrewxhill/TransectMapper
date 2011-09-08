@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
 __doc__='''
 Python script to extract the metadata from transect images stored in a directory and output KML+JSON
@@ -56,45 +56,6 @@ def handlelon(input):
     return s.atof(deg) + s.atof(minute)/60
 
 ######################################################################
-class Template:
-    '''
-    Class documentation goes here.
-
-    >>> print 'This is a doctest'
-    This is a doctest
-    '''
-    def __init__(self,someArg=None):
-    '''
-    Initialize the class.  Add some detail here.
-
-    @param someArg: example argument
-    '''
-    pass  # A way to have a do nothing stub
-
-    def aMethod(self,anotherArg):
-    '''
-    This is a really dumb method that prints it's arg.
-
-    This is the detailed description of aMethod that tells you it
-    is a really moronic method.  It does howver show how to
-    document a class method.
-
-    And a doctest on how to use this exciting method
-
-    >>> Template().aMethod('hello world')
-    hello world
-
-    @param anotherArg: what to print
-    @return: prints the arg to stdout.
-    '''
-    #print anotherArg
-
-    def aDoNothingMethod(self):
-    '''
-    How to write a stub that does not do anything
-    '''
-    pass
-
 def ConvertLatLon(data):
     hem = data[-1]
     if hem in ('E', 'N'):
