@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 
 __doc__='''
 Python script to extract the metadata from transect images stored in a directory and output KML+JSON
@@ -331,7 +331,6 @@ if __name__ == '__main__':
         n = int(n.split('_')[0])
         out['n'] = n
         #print "Reading file: " + f
-        
         # Get the xml data in the header using PIL
         imagefile = PIL.Image.open(f)
         entry = imagefile.app['COM'].replace("white-balance","white_balance")
@@ -350,7 +349,6 @@ if __name__ == '__main__':
             for p in params:
                 
                 if camera.has_key(p.tag):
-                    
                     if p.tag in ['lat','lon']:
                         if p.tag == 'lat':
                             orig = handlelat(p.text)
@@ -359,18 +357,17 @@ if __name__ == '__main__':
                             orig = handlelon(p.text)
                             out['longitude'] = orig
                     out[p.tag] = p.text
-                    
-        e = GroundOverlay(n, float(out['pitch']), float(out['surge']), float(out['altitude']), float(out['latitude']), float(out['longitude']), float(out['roll']), float(out['heading']), f, draworder=drawOrder).getkml()
+        
+        e = GroundOverlay(n, float(out['pitch']), float(out['surge']), float(out['altitude']), float(out['latitude']), float(out['longitude']), float(out['roll']), float(out['heading']), f, draworder=drawOrder)
         if drawOrder == 97:
             do=1
         elif drawOrder == 100:
             do=-1
         drawOrder += do
-        kml.addentry(e)
+        kml.addentry(e.getkml())
         out['overlay'] = e.json
         newdat[n] = out
         i=i+1
-        
     kml_doc = kml.output()
     open(outname+'.kml',"w+").write(kml_doc)
     
