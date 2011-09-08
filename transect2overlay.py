@@ -130,7 +130,7 @@ class KML():
         self.entries.append(entry)
 
 class GroundOverlay():
-    def __init__(self, n, pitch, surge, altitude, latitude, longitude, roll, heading, f):
+    def __init__(self, n, pitch, surge, altitude, latitude, longitude, roll, heading, f, draworder=1):
         self.n =  n
         self.pitch =  pitch
         self.surge =  surge
@@ -140,6 +140,7 @@ class GroundOverlay():
         self.roll =  roll
         self.heading =  heading
         self.f = os.path.abspath(f)
+		self.draworder = draworder
         
         #NOTE
         # - All locations are stored as offsets from the camera center in meters
@@ -211,7 +212,7 @@ class GroundOverlay():
         entry = """
         <GroundOverlay>
            <name>%s</name>
-           <drawOrder>1</drawOrder>
+           <drawOrder>%s</drawOrder>
            <Icon>
               <href>%s</href>
            </Icon>
@@ -224,7 +225,7 @@ class GroundOverlay():
               <rotation>%s</rotation>
            </LatLonBox>
         </GroundOverlay>
-        """ % ( self.n, self.f, self.north, self.south, self.east, self.west, self.heading )
+        """ % ( self.n, self.draworder, self.f, self.north, self.south, self.east, self.west, self.heading )
         return entry
         
     def alt_to_distance(self):
@@ -359,7 +360,8 @@ if __name__ == '__main__':
             
     i = 0
     newdat = {}
-    
+    drawOrder = 100
+	do = -1
     kml = KML()
     
     for f in filenames:
@@ -397,12 +399,15 @@ if __name__ == '__main__':
                             out['longitude'] = orig
                     out[p.tag] = p.text
                     
-        e = GroundOverlay(n, float(out['pitch']), float(out['surge']), float(out['altitude']), float(out['latitude']), float(out['longitude']), float(out['roll']), float(out['heading']), f).getkml()
+        e = GroundOverlay(n, float(out['pitch']), float(out['surge']), float(out['altitude']), float(out['latitude']), float(out['longitude']), float(out['roll']), float(out['heading']), f, draworder=drawOrder).getkml()
+        if drawOrder == 97:
+			do=1
+		elif drawOrder == 100:
+			do=-1
+		drawOrder += do
         kml.addentry(e)
         out['overlay'] = e.json
         newdat[n] = out
-        
-        
         i=i+1
         
     kml_doc = kml.output()
