@@ -64,36 +64,36 @@ class Template:
     This is a doctest
     '''
     def __init__(self,someArg=None):
-	'''
-	Initialize the class.  Add some detail here.
+    '''
+    Initialize the class.  Add some detail here.
 
-	@param someArg: example argument
-	'''
-	pass  # A way to have a do nothing stub
+    @param someArg: example argument
+    '''
+    pass  # A way to have a do nothing stub
 
     def aMethod(self,anotherArg):
-	'''
-	This is a really dumb method that prints it's arg.
+    '''
+    This is a really dumb method that prints it's arg.
 
-	This is the detailed description of aMethod that tells you it
-	is a really moronic method.  It does howver show how to
-	document a class method.
+    This is the detailed description of aMethod that tells you it
+    is a really moronic method.  It does howver show how to
+    document a class method.
 
-	And a doctest on how to use this exciting method
+    And a doctest on how to use this exciting method
 
-	>>> Template().aMethod('hello world')
-	hello world
+    >>> Template().aMethod('hello world')
+    hello world
 
-	@param anotherArg: what to print
-	@return: prints the arg to stdout.
-	'''
-	#print anotherArg
+    @param anotherArg: what to print
+    @return: prints the arg to stdout.
+    '''
+    #print anotherArg
 
     def aDoNothingMethod(self):
-	'''
-	How to write a stub that does not do anything
-	'''
-	pass
+    '''
+    How to write a stub that does not do anything
+    '''
+    pass
 
 def ConvertLatLon(data):
     hem = data[-1]
@@ -140,7 +140,7 @@ class GroundOverlay():
         self.roll =  roll
         self.heading =  heading
         self.f = os.path.abspath(f)
-		self.draworder = draworder
+        self.draworder = draworder
         
         #NOTE
         # - All locations are stored as offsets from the camera center in meters
@@ -361,7 +361,7 @@ if __name__ == '__main__':
     i = 0
     newdat = {}
     drawOrder = 100
-	do = -1
+    do = -1
     kml = KML()
     
     for f in filenames:
@@ -401,10 +401,10 @@ if __name__ == '__main__':
                     
         e = GroundOverlay(n, float(out['pitch']), float(out['surge']), float(out['altitude']), float(out['latitude']), float(out['longitude']), float(out['roll']), float(out['heading']), f, draworder=drawOrder).getkml()
         if drawOrder == 97:
-			do=1
-		elif drawOrder == 100:
-			do=-1
-		drawOrder += do
+            do=1
+        elif drawOrder == 100:
+            do=-1
+        drawOrder += do
         kml.addentry(e)
         out['overlay'] = e.json
         newdat[n] = out
